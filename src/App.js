@@ -4,7 +4,7 @@ function App() {
   const [bill, setBill] = useState(0);
   const [tipPercentage, setTipPercentage] = useState(0);
   const [friendTipPercentage, setFriendTipPercentage] = useState(0);
-  const tip  = bill * ((tipPercentage + friendTipPercentage) / 2) / 100;
+  const tip = (bill * ((tipPercentage + friendTipPercentage) / 2)) / 100;
 
   function handleSetbill(value) {
     if (value) setBill(Number(value));
@@ -44,11 +44,13 @@ function App() {
       >
         How did your friend like the service?
       </ServiceSatisfaction>
-      <CalculatedBillWithTip
-        bill={bill}
-        tip={tip}
-      />
-      <button onClick={handleReset}>Reset</button>
+
+      {bill > 0 && (
+        <>
+          <CalculatedBillWithTip bill={bill} tip={tip} />
+          <button onClick={handleReset}>Reset</button>
+        </>
+      )}
     </div>
   );
 }
